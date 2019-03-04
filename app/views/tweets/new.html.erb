@@ -1,0 +1,20 @@
+<div class="row">
+ <%= form_for @tweet, html: {class: "col s12"} do |f| %>
+        <div class="row">
+          <div class="input-field col s6">
+            <%= f.text_field :image, id: "input_text", placeholder: "画像URL" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= f.text_area :text, id: "textarea1", html: {class: "materialize-textarea"}, placeholder: "テキスト" %>
+
+          </div>
+        </div>
+        <%= button_tag :action, type: "submit", class: "btn #6d4c41 brown darken-1" do%>投稿
+        <i class="material-icons right">send</i>
+        <% end %>
+<% end %>
+</div>
+
+

@@ -1,0 +1,52 @@
+<p><%= @name %>さんの投稿</p>
+
+<div class="row">
+        <div class="col s12 m7">
+          <div class="card">
+            <div class="card-image">
+              <img src= <%= @tweet.image %>>
+              <span class="card-title">
+                <%= @tweet.user.name %>
+              </span>
+            </div>
+            <div class="card-content">
+              <p><%= @tweet.text %></p>
+            </div>
+            <% if user_signed_in? && current_user.id == @tweet.user_id %>
+            <div class="card-action">
+              <%= link_to "編集", "/tweets/#{@tweet.id}/edit", method: :get %>
+              <%= link_to "削除", "/tweets/#{@tweet.id}", method: :delete %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+</div>
+
+<div class="row">
+    <%= form_tag("/tweets/#{@tweet.id}/comments", method: :post, class: "col s12") do %>
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">chat_bubble_outline</i>
+          <textarea id="icon_prefix2" class="materialize-textarea" name="reply"></textarea>
+      </div>
+  </div>
+<button class="btn #6d4c41 brown darken-1" type="submit" name="action">コメント
+    <i class="material-icons right">send</i>
+  </button>
+  <% end %>
+
+<% if @comments %>
+ <% @comments.each do |comment| %>
+<div class="row">
+    <div class="col s12 m5">
+      <div class="card-panel white">
+        <span class="black-text">
+          <storng><%= link_to comment.user.name, "/users/#{comment.user_id}" %>：</strong>
+          <%= comment.reply %>
+        </span>
+      </div>
+    </div>
+  </div>
+  <% end %>
+<% end %>
